@@ -3,7 +3,9 @@ package vn.phatbee.baitap01;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,7 +54,24 @@ public class MainActivity extends AppCompatActivity {
             displayNumbers(listLe, txtLe, "odd");
         });
 
-        }
+        EditText editTextVanBan = findViewById(R.id.editTextVanBan);
+        TextView textViewDaoNguoc = findViewById(R.id.textViewDaoNguoc);
+        Button btnDaoNguoc = findViewById(R.id.btnDaoNguoc);
+
+        btnDaoNguoc.setOnClickListener(v -> {
+            String input = editTextVanBan.getText().toString().trim();
+            String reversed = reverseString(input);
+            textViewDaoNguoc.setText(reversed);
+            Toast.makeText(MainActivity.this, "Đảo ngược thành công: " + reversed, Toast.LENGTH_LONG).show();
+        });
+    }
+
+    private String reverseString(String input){
+        List<String> words = Arrays.asList(input.split(" "));
+        Collections.reverse(words);
+        return String.join(" ", words).toUpperCase();
+    }
+
     private ArrayList<Integer> generateRandomNumbers(int count) {
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < count; i++) {
