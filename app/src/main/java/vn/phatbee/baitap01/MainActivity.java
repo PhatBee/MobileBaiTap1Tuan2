@@ -60,10 +60,15 @@ public class MainActivity extends AppCompatActivity {
 
         btnDaoNguoc.setOnClickListener(v -> {
             String input = editTextVanBan.getText().toString().trim();
-            String reversed = reverseString(input);
+            String normalized = normalizeString(input);
+            String reversed = reverseString(normalized);
             textViewDaoNguoc.setText(reversed);
             Toast.makeText(MainActivity.this, "Đảo ngược thành công: " + reversed, Toast.LENGTH_LONG).show();
         });
+    }
+
+    String normalizeString(String input){
+        return input.trim().replaceAll("\\s+", " ");
     }
 
     private String reverseString(String input){
